@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">WindChimeWeather</string>
     <string name="test">test!</string>
+    <string name="search_city">查询城市</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 
 </resources>

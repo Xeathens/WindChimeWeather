@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">风铃天气</string>
     <string name="test">风铃天气!</string>
+    <string name="search_city">查询城市</string>
 </resources>
