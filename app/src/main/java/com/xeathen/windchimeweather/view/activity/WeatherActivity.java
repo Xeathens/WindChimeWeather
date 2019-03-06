@@ -14,6 +14,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import com.xeathen.windchimeweather.bean.db.CityDB;
 import com.xeathen.windchimeweather.bean.gson.DailyForecast;
 import com.xeathen.windchimeweather.bean.gson.WeatherAir;
 import com.xeathen.windchimeweather.bean.gson.WeatherBasic;
+import com.xeathen.windchimeweather.common.MyApplication;
 import com.xeathen.windchimeweather.controller.ActivityCollector;
 import com.xeathen.windchimeweather.util.SharedPreferencesUtil;
 
@@ -50,8 +52,6 @@ import interfaces.heweather.com.interfacesmodule.view.HeWeather;
 
 public class WeatherActivity extends BaseActivity {
 
-//    @BindView(R.id.spn_cities_list)
-//    Spinner citiesListSpn;
 
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
@@ -81,8 +81,6 @@ public class WeatherActivity extends BaseActivity {
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
 
-//    @BindView(R.id.menu_button)
-//    Button menuButton;
 
     @BindView(R.id.fab)
     FloatingActionButton fab;
@@ -90,11 +88,6 @@ public class WeatherActivity extends BaseActivity {
     @BindView(R.id.forecast_layout)
     LinearLayout forecastLayout;
 
-    private List<String> cityNameList = new ArrayList<>();
-
-    private ArrayAdapter citiesListAdapter;
-
-    private List<CityDB> cityDBList = new ArrayList<>();
 
     private String currentCityId;
 
@@ -104,10 +97,12 @@ public class WeatherActivity extends BaseActivity {
 
     private String weatherAirJson;
 
+    private SharedPreferencesUtil mSpfu;
+
 
     private long exitTime = 0;
 
-    private boolean success = true;
+    private boolean success;
 
 
     @Override
@@ -120,19 +115,17 @@ public class WeatherActivity extends BaseActivity {
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+        mSpfu = SharedPreferencesUtil.getInstance();
         initView();
         initDrawer();
-//        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-//        currentCityId = prefs.getString("current_city_id", null);
-        currentCityId = SharedPreferencesUtil.getString("current_city_id", "CN101230101");
+
+        currentCityId = mSpfu.getString("current_city_id", "CN101230101");
         if (currentCityId != null) { //有默认城市
             currentCityDB = LitePal.where("cityId = ?", currentCityId).find(CityDB.class).get(0);
-
-//            weatherBasicJson = prefs.getString("json_weather_basic_" + currentCityId, null);
-            weatherBasicJson = SharedPreferencesUtil.getString("json_weather_basic_"+ currentCityId, null);
-//            weatherAirJson = prefs.getString("json_weather_air_" + currentCityId, null);
-            weatherAirJson = SharedPreferencesUtil.getString("json_weather_air_" + currentCityId, null);
-            if (weatherBasicJson != null && weatherAirJson != null) { //默认城市有缓存的情况下，直接读取缓存数据
+            weatherBasicJson = mSpfu.getString("json_weather_basic_"+ currentCityId, null);
+            weatherAirJson = mSpfu.getString("json_weather_air_" + currentCityId, null);
+            if (weatherBasicJson != null && weatherAirJson != null
+                    && !weatherBasicJson.equals("") && !weatherAirJson.equals("") ) { //默认城市有缓存的情况下，直接读取缓存数据
                 LogUtil.d(TAG, "默认城市有缓存");
                 WeatherBasic weatherBasic = new Gson().fromJson(weatherBasicJson, WeatherBasic.class);
                 WeatherAir weatherAir = new Gson().fromJson(weatherAirJson, WeatherAir.class);
@@ -146,14 +139,7 @@ public class WeatherActivity extends BaseActivity {
                 requestWeather(currentCityId);
 
             }
-//            cityDBList = LitePal.findAll(CityDB.class);
-//
-//            cityNameList = new ArrayList<>();
-//            for (CityDB cityDB : cityDBList) {
-////                City city = new City(cityDB.getName(), cityDB.getCityId(), cityDB.getAdminArea(), cityDB.getCountry());
-////                cityList.add(city);
-//                cityNameList.add(cityDB.getName());
-//            }
+
             LogUtil.i(TAG, "onCreate");
             LogUtil.i(TAG, "current:" + currentCityId);
 
@@ -169,6 +155,7 @@ public class WeatherActivity extends BaseActivity {
 
     private void requestWeather(final String cityId) {
 
+        success = true; //初始化布尔值success
 
         HeWeather.getWeather(this, cityId, Lang.CHINESE_SIMPLIFIED, Unit.METRIC, new HeWeather.OnResultWeatherDataListBeansListener() {
             @Override
@@ -189,12 +176,8 @@ public class WeatherActivity extends BaseActivity {
                 String content = new Gson().toJson(list.get(0));
                 if (content != null && !content.equals("")) {
                     final WeatherBasic weatherBasic = new Gson().fromJson(new Gson().toJson(list.get(0)), WeatherBasic.class);
-//                    LogUtil.i(TAG, "onWeatherBasic:" + weatherBasic.lifeStyles.get(0).txt);
 
-//                    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
-//                    editor.putString("json_weather_basic_" + currentCityId, content);
-//                    editor.apply();
-                    SharedPreferencesUtil.saveString("json_weather_basic_" + currentCityId, content);
+                    mSpfu.saveString("json_weather_basic_" + currentCityId, content);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -234,8 +217,8 @@ public class WeatherActivity extends BaseActivity {
                         String content = new Gson().toJson(list.get(0));
                         if (content != null && !content.equals("")) {
                             final WeatherAir weatherAir = new Gson().fromJson(new Gson().toJson(list.get(0)), WeatherAir.class);
-                            LogUtil.i(TAG, new Gson().toJson(list.get(0)));
-                            SharedPreferencesUtil.saveString("json_weather_air_" + currentCityId, content);
+//                            LogUtil.i(TAG, new Gson().toJson(list.get(0)));
+                            mSpfu.saveString("json_weather_air_" + currentCityId, content);
 
                             runOnUiThread(new Runnable() {
                                 @Override
@@ -256,9 +239,8 @@ public class WeatherActivity extends BaseActivity {
                 String content = new Gson().toJson(list.get(0));
                 if (content != null && !content.equals("")) {
                     final WeatherAir weatherAir = new Gson().fromJson(new Gson().toJson(list.get(0)), WeatherAir.class);
-                    LogUtil.i(TAG, new Gson().toJson(list.get(0)));
-                    SharedPreferencesUtil.saveString("json_weather_air_" + currentCityId, content);
-
+//                    LogUtil.i(TAG, new Gson().toJson(list.get(0)));
+                    mSpfu.saveString("json_weather_air_" + currentCityId, content);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -304,61 +286,6 @@ public class WeatherActivity extends BaseActivity {
         qlty.setText(weatherAir.airCity.aqi + " " + weatherAir.airCity.qlty);
     }
 
-//    public void initCitiesListAdapter() {
-//
-//
-//        try {
-//            citiesListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, cityNameList);
-//            citiesListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//            citiesListSpn.setAdapter(citiesListAdapter);
-//            for (int i = 0; i < cityDBList.size(); i++) {
-//                if (currentCityId.equals(cityDBList.get(i).getCityId())) {
-//                    citiesListSpn.setSelection(i, true);
-//                    break;
-//                }
-//            }
-//
-//            citiesListSpn.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//                @Override
-//                public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
-//                    HeWeather.getWeatherForecast(WeatherActivity.this, /*citiesListAdapter.getItem(position).toString()*/cityDBList.get(position).getCityId(), Lang.CHINESE_SIMPLIFIED, Unit.METRIC, new HeWeather.OnResultWeatherForecastBeanListener() {
-//                        @Override
-//                        public void onError(Throwable throwable) {
-//
-//                        }
-//
-//                        @Override
-//                        public void onSuccess(List<Forecast> list) {
-//
-//                            WeatherForecast weatherForecast = new Gson().fromJson(new Gson().toJson(list.get(0)), WeatherForecast.class);
-//                            LogUtil.i(TAG, "onSuccess1:" + new Gson().toJson(weatherForecast));
-//
-//                            //显示天气信息
-//                            showWeatherInfo(weatherForecast);
-//
-//
-//                        }
-//                    });
-//
-//                    //改变current
-//                    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext()).edit();
-//                    editor.putString("current_city_id", cityDBList.get(position).getCityId());
-//                    currentCityId = cityDBList.get(position).getCityId();
-//                    editor.apply();
-//
-//                    LogUtil.i(TAG, "onSelected" + currentCityId);
-//                }
-//
-//                @Override
-//                public void onNothingSelected(AdapterView<?> parent) {
-//
-//                }
-//            });
-//
-//        } catch (Exception e) {
-//            LogUtil.e(TAG, e.getMessage());
-//        }
-//    }
 
 
     @OnClick(R.id.fab)
@@ -372,25 +299,8 @@ public class WeatherActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        currentCityId = prefs.getString("current_city_id", null);
-        if (currentCityId != null) {
-            cityDBList = LitePal.findAll(CityDB.class);
-//            cityList = new ArrayList<>();
-            cityNameList = new ArrayList<>();
-            for (CityDB cityDB : cityDBList) {
-//                City city = new City(cityDB.getName(), cityDB.getCityId(), cityDB.getAdminArea(), cityDB.getCountry());
-//                cityList.add(city);
-                cityNameList.add(cityDB.getName());
-                //spinner设置默认选择
-                //记得改变spinner大小
-//                LogUtil.i(TAG, cityDB.getName() + ", "+ cityDB.getCityId() + ","+cityDBS.size());
-            }
-            LogUtil.i(TAG, "onResume");
-            LogUtil.i(TAG, "current:" + currentCityId);
-//            initCitiesListAdapter();
-
-        } else {
+        if (drawerLayout.isDrawerOpen(Gravity.START)) {
+            drawerLayout.closeDrawer(Gravity.START);
 
         }
     }
@@ -406,7 +316,6 @@ public class WeatherActivity extends BaseActivity {
             @Override
             public void onRefresh() {
                 requestWeather(currentCityId);
-//                toastShort(WeatherActivity.this, "test");
             }
         });
     }
@@ -427,7 +336,8 @@ public class WeatherActivity extends BaseActivity {
                             return true;
 
                         case R.id.nav_setting:
-                            toastShort(WeatherActivity.this, "setting");
+                            Intent intent1 = new Intent(WeatherActivity.this, SettingsActivity.class);
+                            startActivity(intent1);
                             return true;
                     }
                     return true;
@@ -438,6 +348,7 @@ public class WeatherActivity extends BaseActivity {
                             R.string.navigation_drawer_close);
             drawerLayout.addDrawerListener(toggle);
             toggle.syncState();
+
         }
     }
 

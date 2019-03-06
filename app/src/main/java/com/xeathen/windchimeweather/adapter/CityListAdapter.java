@@ -16,6 +16,7 @@ import com.xeathen.windchimeweather.R;
 import com.xeathen.windchimeweather.bean.db.CityDB;
 import com.xeathen.windchimeweather.bean.model.City;
 import com.xeathen.windchimeweather.common.MyApplication;
+import com.xeathen.windchimeweather.service.AutoUpdateService;
 import com.xeathen.windchimeweather.view.activity.WeatherActivity;
 
 import java.util.List;
@@ -89,6 +90,10 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
                 editor.putString("current_city_id", city.getID());
                 editor.apply();
 //                Toast.makeText(MyApplication.getContext(), "保存成功", Toast.LENGTH_SHORT).show();
+                //启动自动更新服务
+                Intent service = new Intent(MyApplication.getContext(), AutoUpdateService.class);
+                MyApplication.getContext().startService(service);
+
                 Intent intent = new Intent(mContext, WeatherActivity.class);
                 mContext.startActivity(intent);
             }

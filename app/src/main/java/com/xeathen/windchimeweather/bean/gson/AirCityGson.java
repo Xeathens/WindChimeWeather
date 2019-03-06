@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
  */
 public class AirCityGson {
 
+    @SerializedName("aqi")
     public String aqi; //空气质量指数
 
     @SerializedName("pub_time")

@@ -1,0 +1,11 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="系统">
+        <Preference
+            android:key="auto_update_time"
+            android:title="自动更新频率"/>
+        <Preference
+            android:key="clear_cache"
+            android:title="清除缓存"/>
+    </PreferenceCategory>
+</PreferenceScreen>

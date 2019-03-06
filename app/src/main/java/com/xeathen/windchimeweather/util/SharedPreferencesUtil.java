@@ -13,14 +13,49 @@ import com.xeathen.windchimeweather.view.activity.WeatherActivity;
  */
 public class SharedPreferencesUtil {
 
-    public static void saveString(String key, String value){
+    private static SharedPreferencesUtil spfu;
+
+    public static final String AUTO_UPDATE_TIME = "auto_update_time";//自动更新频率
+
+    public static final String CLEAR_CACHE = "clear_cache"; //清空缓存
+
+    private SharedPreferences mPrefs;
+
+
+    public  void saveString(String key, String value) {
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext()).edit();
-        editor.putString(key , value);
+        editor.putString(key, value);
         editor.apply();
     }
 
-    public static String getString(String key, String defValue){
+    public  String getString(String key, String defValue) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
-        return prefs.getString(key, null);
+        return prefs.getString(key, defValue);
     }
+
+    public void setAutoUpdateTime(int time) {
+        mPrefs.edit().putInt(AUTO_UPDATE_TIME, time).apply();
+    }
+
+    public int getAutoUpdateTime() {
+        return mPrefs.getInt(AUTO_UPDATE_TIME, 3);
+    }
+
+
+
+    private SharedPreferencesUtil() {
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
+    }
+
+    public static SharedPreferencesUtil getInstance() {
+        if (spfu == null ){
+            synchronized (SharedPreferencesUtil.class){
+                if (spfu == null){
+                    spfu = new SharedPreferencesUtil();
+                }
+            }
+        }
+        return spfu;
+    }
+
 }

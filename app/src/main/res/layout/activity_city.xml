@@ -31,8 +31,6 @@
             >
 
 
-            <!--<include layout="@layout/city_card_title"-->
-                <!--android:visibility="gone"/>-->
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_city_card"
