@@ -23,6 +23,8 @@ public class CityDB extends LitePalSupport{
 
     private String country;
 
+    private boolean isGps;
+
 
     public String getCountry() {
         return country;
@@ -70,5 +72,13 @@ public class CityDB extends LitePalSupport{
 
     public void setParentCity(String parentCity) {
         this.parentCity = parentCity;
+    }
+
+    public boolean isGps() {
+        return isGps;
+    }
+
+    public void setGps(boolean gps) {
+        isGps = gps;
     }
 }

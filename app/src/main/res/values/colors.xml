@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/qinzhu</color>
-    <color name="colorPrimaryDark">@color/qinzhu</color>
-    <color name="colorAccent">@color/qinzhu</color>
+    <color name="colorPrimary">@color/ruozhu</color>
+    <color name="colorPrimaryDark">@color/ruozhu</color>
+    <color name="colorAccent">@color/lianglan</color>
       
     <color name="white">#FFFFFF</color><!--白色 -->
       
@@ -77,7 +77,7 @@
     <color name="yueyabai">#fffffb</color>
 
     <color name="rubai">#d3d7d4</color>
-    
+
     <color name="tiese">#005344</color>
 
     <color name="conglv">#006c54</color>
@@ -85,27 +85,31 @@
     <color name="qinzhu">#72baa7</color>
 
     <color name="hufen">#fffef9</color>
-    
+
     <color name="shenchen">#f6f5ec</color>
 
     <color name="shuise">#afdfe4</color>
-    
 
-    <color name="txt_now">@color/yunahu</color>
-    <color name="txt_hourly">@color/yunahu</color>
-    <color name="txt_forecast">@color/yunahu</color>
+    <color name="qinlan">#37CBC1</color>
+
+    <color name="lianglan">#2D99F4</color>
+
+    <color name="mohei">#323333</color>
+
+    <color name="txt_now">@color/white</color>
+    <color name="txt_hourly">@color/white</color>
+    <color name="txt_forecast">@color/white</color>
     <color name="txt_lifestyle">#ffffff</color>
 
 
-
-    <color name="bg_now">@color/white</color>
-    <color name="bg_hourly">@color/white</color>
-    <color name="bg_forecast">@color/white</color>
+    <color name="bg_now">@color/qinzhu</color>
+    <color name="bg_hourly">@color/qinzhu</color>
+    <color name="bg_forecast">@color/qinzhu</color>
     <color name="bg_lifestyle">@color/qinzhu</color>
 
     <color name="ic_now">#ffffff</color>
     <color name="ic_weather">@color/shuise</color>
-    <color name="ic_about">#74787c</color>
+    <color name="ic_about">@color/lianglan</color>
     <color name="ic_cw">@color/white</color>
     <color name="ic_create">@color/white</color>
     <color name="ic_moon"></color>

@@ -4,10 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.widget.Toast;
 
+
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.xeathen.windchimeweather.custom.OkHttpUpdateHttpService;
-import com.xeathen.windchimeweather.view.activity.MainActivity;
 import com.xuexiang.xupdate.XUpdate;
 import com.xuexiang.xupdate.entity.UpdateError;
 import com.xuexiang.xupdate.listener.OnUpdateFailureListener;
@@ -16,6 +16,8 @@ import com.xuexiang.xupdate.utils.UpdateUtils;
 import org.litepal.LitePal;
 
 import interfaces.heweather.com.interfacesmodule.view.HeConfig;
+
+
 
 /**
  * @author: 蛋清蛋黄
@@ -37,6 +39,8 @@ public class MyApplication extends Application {
         //和风天气初始化设置
         HeConfig.init("HE1807241619061769", "d8d9b6e2afde458e90d135b1bdf4e767"); //init,全局处理一次即可
         HeConfig.switchToFreeServerNode(); //切换至免费节点
+
+
 
 
         //初始化友盟SDK

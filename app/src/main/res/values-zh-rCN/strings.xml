@@ -3,7 +3,7 @@
     <string name="test">风铃天气!</string>
     <string name="search_city">查询城市</string>
     <string name="thank_title">我想说的话</string>
-    <string name="thank_text">\u3000\u3000历经数月的修补，风铃天气终于穿上了第一件衣裳，尽管她并不完美，甚至有些脆弱，但她仍然是我倾注了心血的第一件作品。</string>
+    <string name="thank_text">\u3000\u3000历经数月的修补，风铃天气终于穿上了第一件衣裳，尽管衣着简陋，甚至有些脆弱，但她仍然是我倾注了心血的第一件作品。</string>
     <string name="link_title">风铃天气的一切</string>
     <string name="data_source">数据来源: 和风天气</string>
 </resources>

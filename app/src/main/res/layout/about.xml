@@ -2,15 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="30dp"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp"
-    android:layout_marginTop="30dp"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="30dp"
         android:orientation="vertical">
 
         <TextView
@@ -34,6 +34,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
             android:text="@string/thank_text"
             android:textColor="@color/baomo" />
 
@@ -50,6 +52,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="15dp"
         android:orientation="vertical">
 
@@ -69,66 +74,106 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="4dp"
             android:background="#60d3d3d3"/>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:layout_marginLeft="5dp"
-            android:columnCount="2">
 
-            <Button
-                android:id="@+id/bt_roast"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:drawableStart="@drawable/ic_roast"
-                android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
-                android:gravity="start|center_vertical"
-                android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/baomo"
-                android:text="吐槽"/>
-            <Button
-                android:id="@+id/bt_upgrade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:drawableStart="@drawable/ic_upgrade"
-                android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
-                android:gravity="start|center_vertical"
-                android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/baomo"
-                android:text="检查更新"/>
-            <Button
-                android:id="@+id/bt_donate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:drawableStart="@drawable/ic_money"
-                android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
-                android:gravity="start|center_vertical"
-                android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/baomo"
-                android:text="赏根头发"/>
-            <Button
-                android:id="@+id/bt_share"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:drawableStart="@drawable/ic_share"
-                android:drawablePadding="10dp"
-                android:paddingLeft="10dp"
-                android:gravity="start|center_vertical"
-                android:background="?android:attr/selectableItemBackground"
-                android:textColor="@color/baomo"
-                android:text="分享风铃天气"/>
-
-
-        </GridLayout>
 
     </LinearLayout>
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="55dp"
+        android:columnCount="2">
 
+        <TextView
+            android:id="@+id/bt_roast"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+
+
+            android:drawableStart="@drawable/ic_roast"
+            android:drawablePadding="10dp"
+
+            android:gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/baomo"
+            android:text="我要吐槽"/>
+        <TextView
+            android:id="@+id/bt_upgrade"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+
+
+
+            android:drawableStart="@drawable/ic_upgrade"
+            android:drawablePadding="10dp"
+
+            android:gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/baomo"
+            android:text="检查更新"/>
+        <TextView
+            android:id="@+id/bt_donate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+
+
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_money"
+            android:drawablePadding="10dp"
+
+            android:gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/baomo"
+            android:text="赏根头发"/>
+        <TextView
+            android:id="@+id/bt_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+
+
+
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_share"
+            android:drawablePadding="10dp"
+
+            android:gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/baomo"
+            android:text="分享风铃"/>
+
+        <TextView
+            android:id="@+id/bt_code"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_code"
+            android:drawablePadding="10dp"
+
+            android:gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/baomo"
+            android:text="查看源码"/>
+
+        <TextView
+            android:id="@+id/bt_contact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:layout_marginTop="20dp"
+            android:drawableStart="@drawable/ic_contact"
+            android:drawablePadding="10dp"
+
+            android:gravity="start|center_vertical"
+            android:background="?android:attr/selectableItemBackground"
+            android:textColor="@color/baomo"
+            android:text="联系作者"/>
+
+
+    </GridLayout>
 
 </LinearLayout>

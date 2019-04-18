@@ -3,7 +3,7 @@
 
     <dbname value="City"></dbname>
 
-    <version value="2"></version>
+    <version value="3"></version>
 
     <list>
         <mapping class="com.xeathen.windchimeweather.bean.db.CityDB"></mapping>

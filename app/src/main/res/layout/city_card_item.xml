@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:drawablePadding="5dp"
             android:textSize="20sp"
             android:textColor="#434343"
             tools:text="闽侯"
@@ -43,7 +44,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_margin="15dp"
-            android:background="@drawable/ic_cancel"
+            android:background="@drawable/ic_delete"
             android:layout_alignParentRight="true"
             />
 

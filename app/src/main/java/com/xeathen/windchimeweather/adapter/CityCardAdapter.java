@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.xeathen.windchimeweather.R;
 import com.xeathen.windchimeweather.bean.db.CityDB;
 import com.xeathen.windchimeweather.common.MyApplication;
+import com.xeathen.windchimeweather.util.WeatherDrawableUtil;
 import com.xeathen.windchimeweather.view.activity.CityActivity;
 import com.xeathen.windchimeweather.view.activity.WeatherActivity;
 
@@ -86,7 +89,13 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
         final CityDB cityDB = mCityList.get(position);
         holder.cardName.setText(cityDB.getName());
         holder.cardCountry.setText(cityDB.getAdminArea());
-
+        if (cityDB.isGps()) {
+            if (Build.VERSION.SDK_INT >= 21) {
+                Drawable drawable = MyApplication.getContext().getDrawable(R.drawable.ic_location);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                holder.cardName.setCompoundDrawables(null, null, drawable, null);
+            }
+        }
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -79,6 +79,7 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
                 cityDB.setParentCity(city.getParentCity());
                 cityDB.setAdminArea(city.getAdminArea());
                 cityDB.setCountry(city.getCountry());
+                cityDB.setGps(false);
                 cityDB.save();
 //                List<CityDB> cityDBS = LitePal.findAll(CityDB.class);
 //                for(CityDB cityDB1 : cityDBS){

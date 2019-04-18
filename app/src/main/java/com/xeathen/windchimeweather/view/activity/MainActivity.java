@@ -49,18 +49,18 @@ public class MainActivity extends BaseActivity {
             finish();
 
         } else { //未选择过任何城市
-//            initAmap();
-//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-//
-//            } else {
-//                LogUtil.i("[onLocation]", "启动定位");
-//                getLocation();
-//            }
-            Intent intent = new Intent(this, SearchActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
+            initAmap();
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
+            } else {
+                LogUtil.i("[onLocation]", "启动定位");
+                getLocation();
+            }
+//            Intent intent = new Intent(this, SearchActivity.class);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//            finish();
 
         }
 
@@ -133,6 +133,7 @@ public class MainActivity extends BaseActivity {
         cityDB.setParentCity(aMapLocation.getCity());
         cityDB.setAdminArea(aMapLocation.getProvince());
         cityDB.setCountry(aMapLocation.getCountry());
+        cityDB.setGps(true);
         cityDB.save();
 
     }

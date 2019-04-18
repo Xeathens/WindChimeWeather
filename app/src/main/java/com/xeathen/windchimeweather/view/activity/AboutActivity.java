@@ -42,22 +42,19 @@ public class AboutActivity extends BaseActivity {
     Toolbar toolbar;
 
     @BindView(R.id.bt_roast)
-    Button btRoast;
+    TextView btRoast;
 
     @BindView(R.id.bt_upgrade)
-    Button btUpgrade;
+    TextView btUpgrade;
 
     @BindView(R.id.bt_donate)
-    Button btDonate;
+    TextView btDonate;
 
     @BindView(R.id.bt_share)
-    Button btShare;
+    TextView btShare;
 
     @BindView(R.id.about_version)
     TextView aboutVersion;
-
-
-
 
 
     @Override
@@ -77,7 +74,7 @@ public class AboutActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//左侧添加一个默认的返回图标
 //        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
-        aboutVersion.setText("当前版本: " + UpdateUtils.getVersionName(this));
+        aboutVersion.setText("当前版本: " + UpdateUtils.getVersionName(this) + " (Build " + String.valueOf(UpdateUtils.getVersionCode(this)) + ")");
 
 
     }
@@ -133,7 +130,7 @@ public class AboutActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 OkHttpClient client = new OkHttpClient();
-                Request request = new Request.Builder().url("https://sc.ftqq.com/SCU47634T634711707d1c42b713158d4f50db6f515ca1f41231b42.send?text=" + roastContent.getText().toString()).build();
+                Request request = new Request.Builder().url("https://sc.ftqq.com/SCU47634T634711707d1c42b713158d4f50db6f515ca1f41231b42.send?text=" + roastName.getText().toString() + "&desp=" + roastContent.getText().toString()).build();
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
@@ -152,7 +149,7 @@ public class AboutActivity extends BaseActivity {
     }
 
     @OnClick(R.id.bt_share)
-    public void showShareDialog(){
+    public void showShareDialog() {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogLayout = inflater.inflate(R.layout.dialog_share, (ViewGroup) findViewById(R.id.dialog_share));
         AlertDialog.Builder builder = new AlertDialog.Builder(this).setView(dialogLayout);
@@ -172,16 +169,21 @@ public class AboutActivity extends BaseActivity {
                 alertDialog.dismiss();
             }
         });
+        share.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return false;
+            }
+        });
     }
 
     @OnClick(R.id.bt_upgrade)
-    public void upgradeApk(){
+    public void upgradeApk() {
         XUpdate.newBuild(this)
                 .updateUrl("http://47.100.235.194:8080/update/checkVersion")
                 .updateParser(new CustomUpdateParser())
                 .update();
     }
-
 
 
     @Override
