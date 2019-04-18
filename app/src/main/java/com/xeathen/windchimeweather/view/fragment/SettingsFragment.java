@@ -46,7 +46,7 @@ public class SettingsFragment extends PreferenceFragment
         mAutoUpdateTime.setSummary(mSpfu.getAutoUpdateTime() == 0 ? "禁止刷新" : String.format(Locale.CHINA, "每%d小时更新", mSpfu.getAutoUpdateTime()));
         mAutoUpdateTime.setOnPreferenceClickListener(this);
         //缓存清除，用文件储存时方可用
-        mClearCache.setSummary("开发中");
+        mClearCache.setSummary("开发调整中");
     }
 
 
@@ -74,12 +74,12 @@ public class SettingsFragment extends PreferenceFragment
         TextView tvDone = dialogLayout.findViewById(R.id.done);
         mSeekBar.setMax(24);
         mSeekBar.setProgress(mSpfu.getAutoUpdateTime());
-        tvShowHour.setText(String.format("每%s小时", mSeekBar.getProgress()));
+        tvShowHour.setText(mSeekBar.getProgress() == 0 ? "禁止刷新" : String.format("每%s小时", mSeekBar.getProgress()));
         alertDialog.show();
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tvShowHour.setText(String.format("每%s小时", mSeekBar.getProgress()));
+                tvShowHour.setText(mSeekBar.getProgress() == 0 ? "禁止刷新" : String.format("每%s小时", mSeekBar.getProgress()));
             }
 
             @Override

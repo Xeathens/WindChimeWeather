@@ -14,4 +14,6 @@ public class NowGson {
     public String tmp;
 
     public String fl;
+
+    public String hum;
 }

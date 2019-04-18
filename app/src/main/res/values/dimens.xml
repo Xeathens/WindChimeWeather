@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_corner_now">4dp</dimen>
+
+    <dimen name="card_corner_hourly">4dp</dimen>
+
+    <dimen name="card_corner_forecast">4dp</dimen>
+
+    <dimen name="card_corner_lifestyle">4dp</dimen>
+
+    <dimen name="card_elevation">5dp</dimen>
+</resources>

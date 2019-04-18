@@ -7,4 +7,12 @@ package com.xeathen.windchimeweather.bean.gson;
  */
 public class HourlyGson {
 
+    public String cond_code;
+
+    public String cond_txt;
+
+    public String tmp;
+
+    public String time;
+
 }

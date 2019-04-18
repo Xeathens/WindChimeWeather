@@ -1,7 +1,5 @@
 package com.xeathen.windchimeweather.view.activity;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +15,6 @@ import com.xeathen.lib.utils.LogUtil;
 import com.xeathen.windchimeweather.R;
 import com.xeathen.windchimeweather.adapter.CityListAdapter;
 import com.xeathen.windchimeweather.bean.model.City;
-import com.xeathen.windchimeweather.controller.ActivityCollector;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +44,10 @@ public class SearchActivity extends BaseActivity {
     private LinearLayoutManager layoutManager;
 
     private CityListAdapter cityListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityCollector.addActivity(this);
 
 //        if (Build.VERSION.SDK_INT >= 21) {
 //            View decorView = getWindow().getDecorView();
@@ -74,6 +70,7 @@ public class SearchActivity extends BaseActivity {
         recyclerView.setLayoutManager(layoutManager);
         cityListAdapter = new CityListAdapter(cityList);
         recyclerView.setAdapter(cityListAdapter);
+
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         etSearchCity.addTextChangedListener(new TextWatcher() {
@@ -122,18 +119,15 @@ public class SearchActivity extends BaseActivity {
                 cityListAdapter.notifyDataSetChanged();
 
 
-
-
-
-
             }
         });
     }
-
 
 
     @Override
     public int initLayout() {
         return R.layout.activity_search;
     }
+
+
 }

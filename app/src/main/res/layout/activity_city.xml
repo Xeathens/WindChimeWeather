@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:overScrollMode="never"
+
                 >
 
 
@@ -53,8 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/sharp_add_white_24"
-        app:backgroundTint="#4aa8e8"
+        app:srcCompat="@drawable/ic_add"
         app:fabSize="auto" />
 
 

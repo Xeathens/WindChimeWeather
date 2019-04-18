@@ -1,33 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#40bac1</color>
-    <color name="colorPrimaryDark">#40bac1</color>
-    <color name="colorAccent">#40bac1</color>
+    <color name="colorPrimary">@color/qinzhu</color>
+    <color name="colorPrimaryDark">@color/qinzhu</color>
+    <color name="colorAccent">@color/qinzhu</color>
+      
+    <color name="white">#FFFFFF</color><!--白色 -->
+      
+    <color name="ivory">#FFFFF0</color><!--象牙色 -->
+      
+    <color name="lightyellow">#FFFFE0</color><!--亮黄色 -->
+      
+    <color name="yellow">#FFFF00</color><!--黄色 -->
+      
+    <color name="snow">#FFFAFA</color><!--雪白色 -->
+      
+    <color name="floralwhite">#FFFAF0</color><!--花白色 -->
+      
+    <color name="lemonchiffon">#FFFACD</color><!--柠檬绸色 -->
+      
+    <color name="cornsilk">#FFF8DC</color><!--米绸色 -->
+      
+    <color name="seashell">#FFF5EE</color><!--海贝色 -->
+      
+    <color name="lavenderblush">#FFF0F5</color><!--淡紫红 -->
+      
+    <color name="papayawhip">#FFEFD5</color><!--番木色 -->
+      
+    <color name="blanchedalmond">#FFEBCD</color><!--白杏色 -->
+      
+    <color name="mistyrose">#FFE4E1</color><!--浅玫瑰色 -->
+      
+    <color name="bisque">#FFE4C4</color><!--桔黄色 -->
+      
+    <color name="moccasin">#FFE4B5</color><!--鹿皮色 -->
+      
+    <color name="navajowhite">#FFDEAD</color><!--纳瓦白 -->
+      
+    <color name="peachpuff">#FFDAB9</color><!--桃色 -->
+      
+    <color name="gold">#FFD700</color><!--金色 -->
+      
+    <color name="pink">#FFC0CB</color><!--粉红色 -->
+      
+    <color name="lightpink">#FFB6C1</color><!--亮粉红色 -->
+      
+    <color name="orange">#FFA500</color><!--橙色 -->
+      
+    <color name="lightsalmon">#FFA07A</color><!--亮肉色 -->
+      
+    <color name="darkorange">#FF8C00</color><!--暗桔黄色 -->
+      
+    <color name="coral">#FF7F50</color><!--珊瑚色 -->
+     
+    <color name="mo">#464547</color><!--墨色 -->
+    <color name="baomo">#74787c</color><!--薄墨色 -->
+     
+    <color name="yunahu">#008792</color><!--御纳戸色 -->
+    <color name="xinqiao">#50b7c1</color><!--新桥色 -->
+    <color name="qianpiao">#2468a2</color><!--浅缥 -->
+    <color name="qinlv">#00ae9d</color><!--青绿色 -->
+    <color name="bohua">#2585a6</color><!--薄花 -->
+    <color name="lucao">#33a3dc</color><!--露草 -->
+    <color name="qiancong">#00a6ac</color><!--浅葱色 -->
+    <color name="anhui">#6d6d6d</color><!--暗灰 -->
+    <color name="anlan">#9EB5C7</color><!--暗灰 -->
+    <color name="chashu">#9d9087</color><!--茶鼠 -->
+    <color name="yinshu">#a1a3a6</color><!--暗灰 -->
+    <color name="shizhu">#d1c7b7</color><!--石竹色 -->
 
-    <color name="transparent">#00000000</color><!--透明色 -->   
-    <color name="white">#FFFFFF</color><!--白色 -->   
-    <color name="ivory">#FFFFF0</color><!--象牙色 -->   
-    <color name="lightyellow">#FFFFE0</color><!--亮黄色 -->   
-    <color name="yellow">#FFFF00</color><!--黄色 -->   
-    <color name="snow">#FFFAFA</color><!--雪白色 -->   
-    <color name="floralwhite">#FFFAF0</color><!--花白色 -->   
-    <color name="lemonchiffon">#FFFACD</color><!--柠檬绸色 -->   
-    <color name="cornsilk">#FFF8DC</color><!--米绸色 -->   
-    <color name="seashell">#FFF5EE</color><!--海贝色 -->   
-    <color name="lavenderblush">#FFF0F5</color><!--淡紫红 -->   
-    <color name="papayawhip">#FFEFD5</color><!--番木色 -->   
-    <color name="blanchedalmond">#FFEBCD</color><!--白杏色 -->   
-    <color name="mistyrose">#FFE4E1</color><!--浅玫瑰色 -->   
-    <color name="bisque">#FFE4C4</color><!--桔黄色 -->   
-    <color name="moccasin">#FFE4B5</color><!--鹿皮色 -->   
-    <color name="navajowhite">#FFDEAD</color><!--纳瓦白 -->   
-    <color name="peachpuff">#FFDAB9</color><!--桃色 -->   
-    <color name="gold">#FFD700</color><!--金色 -->   
-    <color name="pink">#FFC0CB</color><!--粉红色 -->   
-    <color name="lightpink">#FFB6C1</color><!--亮粉红色 -->   
-    <color name="orange">#FFA500</color><!--橙色 -->   
-    <color name="lightsalmon">#FFA07A</color><!--亮肉色 -->   
-    <color name="darkorange">#FF8C00</color><!--暗桔黄色 -->   
-    <color name="coral">#FF7F50</color><!--珊瑚色 -->   
+    <color name="xiangya">#f2eada</color><!--象牙色 -->
+
+    <color name="ruozhu">#65c294</color><!--若竹色 -->
+
+    <color name="liuli">#2a5caa</color><!--琉璃色 -->
+
+    <color name="yueyabai">#fffffb</color>
+
+    <color name="rubai">#d3d7d4</color>
+    
+    <color name="tiese">#005344</color>
+
+    <color name="conglv">#006c54</color>
+
+    <color name="qinzhu">#72baa7</color>
+
+    <color name="hufen">#fffef9</color>
+    
+    <color name="shenchen">#f6f5ec</color>
+
+    <color name="shuise">#afdfe4</color>
+    
+
+    <color name="txt_now">@color/yunahu</color>
+    <color name="txt_hourly">@color/yunahu</color>
+    <color name="txt_forecast">@color/yunahu</color>
+    <color name="txt_lifestyle">#ffffff</color>
+
+
+
+    <color name="bg_now">@color/white</color>
+    <color name="bg_hourly">@color/white</color>
+    <color name="bg_forecast">@color/white</color>
+    <color name="bg_lifestyle">@color/qinzhu</color>
+
+    <color name="ic_now">#ffffff</color>
+    <color name="ic_weather">@color/shuise</color>
+    <color name="ic_about">#74787c</color>
+    <color name="ic_cw">@color/white</color>
+    <color name="ic_create">@color/white</color>
+    <color name="ic_moon"></color>
+
 
 </resources>

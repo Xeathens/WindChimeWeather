@@ -4,9 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import com.xeathen.windchimeweather.controller.ActivityCollector;
 
 import butterknife.ButterKnife;
 
@@ -29,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        ActivityCollector.addActivity(this);
         if (!isShowState) {
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                     WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -88,4 +89,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

@@ -17,7 +17,8 @@
         android:layout_below="@+id/title"
         android:id="@+id/time_seekbar"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
     </SeekBar>
     <TextView
         android:id="@+id/tv_showhour"

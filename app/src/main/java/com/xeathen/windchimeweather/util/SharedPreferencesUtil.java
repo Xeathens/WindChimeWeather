@@ -38,7 +38,7 @@ public class SharedPreferencesUtil {
     }
 
     public int getAutoUpdateTime() {
-        return mPrefs.getInt(AUTO_UPDATE_TIME, 3);
+        return mPrefs.getInt(AUTO_UPDATE_TIME, 12);
     }
 
 

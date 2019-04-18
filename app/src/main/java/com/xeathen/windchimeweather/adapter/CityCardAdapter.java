@@ -18,9 +18,7 @@ import android.widget.Toast;
 
 import com.xeathen.windchimeweather.R;
 import com.xeathen.windchimeweather.bean.db.CityDB;
-import com.xeathen.windchimeweather.bean.model.City;
 import com.xeathen.windchimeweather.common.MyApplication;
-import com.xeathen.windchimeweather.view.activity.BaseActivity;
 import com.xeathen.windchimeweather.view.activity.CityActivity;
 import com.xeathen.windchimeweather.view.activity.WeatherActivity;
 
@@ -40,7 +38,6 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
     private Context mContext;
 
     private List<CityDB> mCityList;
-
 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -108,8 +105,8 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
             public void onClick(View v) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
                 String currentCityId = prefs.getString("current_city_id", null);
-                if(mCityList.size() > 1){ //不允许删除仅剩的城市
-                    if(!cityDB.getCityId().equals(currentCityId)){ //不允许删除当前选择城市
+                if (mCityList.size() > 1) { //不允许删除仅剩的城市
+                    if (!cityDB.getCityId().equals(currentCityId)) { //不允许删除当前选择城市
 
                         LitePal.delete(cityDB.getClass(), cityDB.getId());
                         mCityList = LitePal.findAll(CityDB.class);
@@ -120,7 +117,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
                         editor.remove("json_weather_basic_" + cityDB.getCityId());
                         editor.remove("json_weather_air_" + cityDB.getCityId());
                         editor.apply();
-                    }else {
+                    } else {
                         //Dialog
                         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                         dialog.setTitle("警告");
@@ -134,7 +131,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
                         });
                         dialog.show();
                     }
-                }else {
+                } else {
                     //Dialog
                     AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                     dialog.setTitle("警告");
@@ -149,17 +146,10 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
                     dialog.show();
                 }
 
-
-
-
-
-
             }
         });
 
     }
-
-
 
 
     @Override

@@ -19,11 +19,14 @@ public class WeatherBasic {
     public UpdateGson update;
 
     @SerializedName("daily_forecast")
-    public List<DailyForecast> forecasts;
+    public List<DailyForecast> forecastList;
 
     @SerializedName("lifestyle")
-    public List<DailyLifeStyle> lifeStyles;
+    public List<DailyLifeStyle> lifeStyleList;
 
     @SerializedName("now")
     public NowGson now;
+
+    @SerializedName("hourly")
+    public List<HourlyGson> hourlyGsonList;
 }

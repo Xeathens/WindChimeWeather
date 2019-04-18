@@ -26,11 +26,11 @@
             android:id="@+id/edit_search_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp
-"
+            android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+
             android:imeActionLabel="搜索"
             android:imeOptions="actionSearch"
             android:inputType="text"
