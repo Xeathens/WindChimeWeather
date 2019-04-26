@@ -17,7 +17,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/txt_hourly" />
+            android:textColor="@color/txt_hourly"
+            android:textSize="15sp"
+            />
 
         <ImageView
             android:id="@+id/hourly_cond_txt"
@@ -26,7 +28,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
-            android:textColor="@color/txt_hourly"
+
 
             />
 
@@ -36,6 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/txt_hourly"
+            android:textSize="15sp"
 
             />
     </LinearLayout>

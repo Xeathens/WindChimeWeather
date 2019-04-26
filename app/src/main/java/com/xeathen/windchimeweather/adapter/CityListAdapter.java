@@ -92,8 +92,8 @@ public class CityListAdapter extends RecyclerView.Adapter<CityListAdapter.ViewHo
                 editor.apply();
 //                Toast.makeText(MyApplication.getContext(), "保存成功", Toast.LENGTH_SHORT).show();
                 //启动自动更新服务
-                Intent service = new Intent(MyApplication.getContext(), AutoUpdateService.class);
-                MyApplication.getContext().startService(service);
+//                Intent service = new Intent(MyApplication.getContext(), AutoUpdateService.class);
+//                MyApplication.getContext().startService(service);
 
                 Intent intent = new Intent(mContext, WeatherActivity.class);
                 mContext.startActivity(intent);

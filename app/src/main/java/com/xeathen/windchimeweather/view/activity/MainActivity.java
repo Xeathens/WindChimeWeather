@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -19,7 +21,10 @@ import com.amap.api.location.AMapLocationListener;
 import com.xeathen.lib.utils.LogUtil;
 import com.xeathen.windchimeweather.R;
 import com.xeathen.windchimeweather.bean.db.CityDB;
+import com.xeathen.windchimeweather.controller.ActivityCollector;
+import com.xeathen.windchimeweather.custom.CustomUpdateParser;
 import com.xeathen.windchimeweather.util.SharedPreferencesUtil;
+import com.xuexiang.xupdate.XUpdate;
 
 
 public class MainActivity extends BaseActivity {
@@ -49,20 +54,23 @@ public class MainActivity extends BaseActivity {
             finish();
 
         } else { //未选择过任何城市
-            initAmap();
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+                initAmap();
 
             } else {
                 LogUtil.i("[onLocation]", "启动定位");
+                initAmap();
                 getLocation();
             }
+
 //            Intent intent = new Intent(this, SearchActivity.class);
 //            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 //            startActivity(intent);
 //            finish();
 
         }
+
 
 
     }
@@ -77,11 +85,20 @@ public class MainActivity extends BaseActivity {
                     LogUtil.i("[onLocation]", "启动定位");
                     getLocation();
                 } else {
-                    toastLong(this, "您拒绝了定位权限");
+                    toastLong(this, "您拒绝了定位权限,即将退出程序!");
                     //
-                    Intent intent = new Intent(this, SearchActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+//                    Intent intent = new Intent(this, SearchActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            ActivityCollector.finishAll();
+                            System.exit(0);
+                        }
+                    }, 3000);//3秒后执行Runnable中的run方法
+
                 }
             default:
         }
@@ -102,10 +119,9 @@ public class MainActivity extends BaseActivity {
                 Intent intent = new Intent(MainActivity.this, WeatherActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-
                 mLocationClient.stopLocation();
                 mLocationClient.onDestroy();
-
+                mLocationClient = null;
                 finish();
 
             }
@@ -124,11 +140,12 @@ public class MainActivity extends BaseActivity {
     private void getLocation() {
         mLocationClient.startLocation();
 
+
     }
 
     private void saveCity(AMapLocation aMapLocation) {
         CityDB cityDB = new CityDB();
-        cityDB.setName(aMapLocation.getCity());
+        cityDB.setName(aMapLocation.getDistrict());
         cityDB.setCityId(aMapLocation.getAdCode());
         cityDB.setParentCity(aMapLocation.getCity());
         cityDB.setAdminArea(aMapLocation.getProvince());

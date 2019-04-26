@@ -6,8 +6,8 @@ android {
         applicationId "com.xeathen.windchimeweather"
         minSdkVersion 18
         targetSdkVersion 27
-        versionCode 3
-        versionName "1.2.0"
+        versionCode 4
+        versionName "1.2.1"
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -17,6 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            // 名称_android_版本号.apk
+            outputFileName = "windchime_${defaultConfig.versionName}_${releaseTime()}.apk"
+        }
+    }
+
+
 
     lintOptions {
         checkReleaseBuilds false
@@ -49,4 +57,7 @@ dependencies {
     implementation files('libs/AMap_Location_V4.5.1_20190402.jar')
 
 
+}
+def releaseTime() {
+    return new Date().format("yyyy_MM_dd", TimeZone.getTimeZone("UTC"))
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/ruozhu</color>
-    <color name="colorPrimaryDark">@color/ruozhu</color>
-    <color name="colorAccent">@color/lianglan</color>
+    <color name="colorPrimary">@color/cpd</color>
+    <color name="colorPrimaryDark">@color/cpd</color>
+    <color name="colorAccent">@color/cpd</color>
       
     <color name="white">#FFFFFF</color><!--白色 -->
       
@@ -84,6 +84,10 @@
 
     <color name="qinzhu">#72baa7</color>
 
+    <color name="cp">#79c1c0</color>
+
+    <color name="cpd">#79c1bb</color>
+
     <color name="hufen">#fffef9</color>
 
     <color name="shenchen">#f6f5ec</color>
@@ -96,19 +100,20 @@
 
     <color name="mohei">#323333</color>
 
+
     <color name="txt_now">@color/white</color>
     <color name="txt_hourly">@color/white</color>
     <color name="txt_forecast">@color/white</color>
     <color name="txt_lifestyle">#ffffff</color>
 
 
-    <color name="bg_now">@color/qinzhu</color>
-    <color name="bg_hourly">@color/qinzhu</color>
-    <color name="bg_forecast">@color/qinzhu</color>
-    <color name="bg_lifestyle">@color/qinzhu</color>
+    <color name="bg_now">@color/cp</color>
+    <color name="bg_hourly">@color/cp</color>
+    <color name="bg_forecast">@color/cp</color>
+    <color name="bg_lifestyle">@color/cp</color>
 
     <color name="ic_now">#ffffff</color>
-    <color name="ic_weather">@color/shuise</color>
+    <color name="ic_weather">@color/white</color>
     <color name="ic_about">@color/lianglan</color>
     <color name="ic_cw">@color/white</color>
     <color name="ic_create">@color/white</color>

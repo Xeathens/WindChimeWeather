@@ -114,7 +114,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
             public void onClick(View v) {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
                 String currentCityId = prefs.getString("current_city_id", null);
-                if (mCityList.size() > 1) { //不允许删除仅剩的城市
+                if (!cityDB.isGps()) { //不允许定位城市
                     if (!cityDB.getCityId().equals(currentCityId)) { //不允许删除当前选择城市
 
                         LitePal.delete(cityDB.getClass(), cityDB.getId());
@@ -130,7 +130,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
                         //Dialog
                         AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                         dialog.setTitle("警告");
-                        dialog.setMessage("不能删除当前城市");
+                        dialog.setMessage("不能删除已选中的城市");
                         dialog.setCancelable(false);
                         dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
@@ -144,7 +144,7 @@ public class CityCardAdapter extends RecyclerView.Adapter<CityCardAdapter.ViewHo
                     //Dialog
                     AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
                     dialog.setTitle("警告");
-                    dialog.setMessage("不能删除仅剩的城市");
+                    dialog.setMessage("不能删除定位城市");
                     dialog.setCancelable(false);
                     dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override

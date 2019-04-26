@@ -24,6 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.xeathen.lib.utils.DateUtil;
 import com.xeathen.lib.utils.LogUtil;
@@ -35,8 +39,10 @@ import com.xeathen.windchimeweather.bean.gson.HourlyGson;
 import com.xeathen.windchimeweather.bean.gson.WeatherAir;
 import com.xeathen.windchimeweather.bean.gson.WeatherBasic;
 import com.xeathen.windchimeweather.controller.ActivityCollector;
+import com.xeathen.windchimeweather.custom.CustomUpdateParser;
 import com.xeathen.windchimeweather.util.SharedPreferencesUtil;
 import com.xeathen.windchimeweather.util.WeatherDrawableUtil;
+import com.xuexiang.xupdate.XUpdate;
 
 import org.litepal.LitePal;
 
@@ -48,8 +54,6 @@ import interfaces.heweather.com.interfacesmodule.bean.Lang;
 import interfaces.heweather.com.interfacesmodule.bean.Unit;
 import interfaces.heweather.com.interfacesmodule.bean.air.Air;
 import interfaces.heweather.com.interfacesmodule.bean.weather.Weather;
-import interfaces.heweather.com.interfacesmodule.bean.weather.hourly.HourlyBase;
-import interfaces.heweather.com.interfacesmodule.bean.weather.lifestyle.Lifestyle;
 import interfaces.heweather.com.interfacesmodule.view.HeWeather;
 
 public class WeatherActivity extends BaseActivity {
@@ -79,8 +83,8 @@ public class WeatherActivity extends BaseActivity {
     @BindView(R.id.lifestyle_hum)
     TextView hum;
 
-    @BindView(R.id.lifestyle_cw)
-    TextView cw;
+    @BindView(R.id.lifestyle_comf)
+    TextView comf;
 
 
     @BindView(R.id.nav_view)
@@ -157,7 +161,6 @@ public class WeatherActivity extends BaseActivity {
 
             } else { //无缓存的情况下向网络请求数据
                 LogUtil.d(TAG, "默认城市缺少缓存");
-
                 requestWeather(currentCityId);
 
             }
@@ -171,6 +174,7 @@ public class WeatherActivity extends BaseActivity {
 //            Intent intent = new Intent(this, SearchActivity.class);
 //            startActivity(intent);
         }
+        checkVersion();
 
     }
 
@@ -276,7 +280,7 @@ public class WeatherActivity extends BaseActivity {
 
         if (success) {
             swipeRefresh.setRefreshing(false);
-            toastShort(this, "刷新成功");
+            toastShort(this, "天气刷新成功");
         }
 
 
@@ -289,7 +293,7 @@ public class WeatherActivity extends BaseActivity {
         hum.setText(weatherBasic.now.hum);
         weatherCondText.setText(weatherBasic.now.cond_txt);
         if (Build.VERSION.SDK_INT >= 21) {
-            Drawable drawable = WeatherDrawableUtil.getDrawableByTxt(weatherBasic.now.cond_txt);
+            Drawable drawable = WeatherDrawableUtil.getDrawableByTxt(Integer.parseInt(weatherBasic.now.cond_code));
             drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
             weatherCondText.setCompoundDrawables(drawable, null, null, null);
         }
@@ -306,7 +310,7 @@ public class WeatherActivity extends BaseActivity {
             condTextD.setText(dailyForecast.cond_txt_d);
             tmp.setText(dailyForecast.tmp_max + "°~" + dailyForecast.tmp_min + "°");
             if (Build.VERSION.SDK_INT >= 21) {
-                Drawable drawable = WeatherDrawableUtil.getDrawableByTxt(dailyForecast.cond_txt_d);
+                Drawable drawable = WeatherDrawableUtil.getDrawableByTxt(Integer.parseInt(dailyForecast.cond_code_d));
                 drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
                 condTextD.setCompoundDrawables(drawable, null, null, null);
             }
@@ -322,10 +326,10 @@ public class WeatherActivity extends BaseActivity {
             int time = Integer.parseInt(cutHour(hourlyGson.time.substring(11)));
             hourlyTime.setText(time + "时");
             if ((time >= 0 && time <= 5) || (time >= 20 && time <= 24)) {
-                condImage.setImageDrawable(WeatherDrawableUtil.getMoonDrawable());
+                condImage.setImageDrawable(WeatherDrawableUtil.getMoonDrawable(hourlyGson.cond_txt));
 
             } else {
-                condImage.setImageDrawable(WeatherDrawableUtil.getDrawableByTxt(hourlyGson.cond_txt));
+                condImage.setImageDrawable(WeatherDrawableUtil.getDrawableByTxt(Integer.parseInt(hourlyGson.cond_code)));
 
             }
             hourlyTmp.setText(hourlyGson.tmp);
@@ -341,8 +345,8 @@ public class WeatherActivity extends BaseActivity {
                 case "sport":
                     sport.setText(lifeStyle.brf);
                     break;
-                case "cw":
-                    cw.setText(lifeStyle.brf);
+                case "comf":
+                    comf.setText(lifeStyle.brf);
             }
         }
 
@@ -391,6 +395,10 @@ public class WeatherActivity extends BaseActivity {
                             Intent intent = new Intent(WeatherActivity.this, CityActivity.class);
                             startActivity(intent);
                             return true;
+
+                        case R.id.nav_location:
+                            getLocationCityId();
+                            break;
 
                         case R.id.nav_setting:
                             Intent intent1 = new Intent(WeatherActivity.this, SettingsActivity.class);
@@ -455,5 +463,70 @@ public class WeatherActivity extends BaseActivity {
         return (oriHour.charAt(0) == '0' ? oriHour.substring(1, 2) : oriHour.substring(0, 2));
     }
 
+    private String getLocationCityId() {
+        //声明AMapLocationClient类对象
+        final AMapLocationClient mLocationClient = new AMapLocationClient(getApplicationContext());
+        //声明定位回调监听器
+        final AMapLocationListener mLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation aMapLocation) {
+                LogUtil.i("[onLocation]", aMapLocation.toString());
+//                SharedPreferencesUtil.getInstance().saveString("current_city_id", aMapLocation.getAdCode());
+//                saveCity(aMapLocation);
+//                SystemClock.sleep(1000);
+                String cityId = aMapLocation.getAdCode();
+                //更新数据库
+                CityDB cityDB = new CityDB();
+                cityDB.setName(aMapLocation.getDistrict());
+                cityDB.setCityId(aMapLocation.getAdCode());
+                cityDB.setParentCity(aMapLocation.getCity());
+                cityDB.setAdminArea(aMapLocation.getProvince());
+                cityDB.setCountry(aMapLocation.getCountry());
+                cityDB.updateAll("isGps = ?", "1");
+                LogUtil.i("[OnLocaton]", "更新数据库");
+
+
+                //
+                if (currentCityDB.isGps()) {
+                    SharedPreferencesUtil.getInstance().saveString("current_city_id", cityId);
+                    requestWeather(cityId);
+                }
+
+                mLocationClient.stopLocation();
+                mLocationClient.onDestroy();
+//                finish();
+
+            }
+        };
+        //声明AMapLocationClientOption对象
+        final AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
+
+
+
+        mLocationClient.setLocationListener(mLocationListener);
+
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving)
+                .setLocationCacheEnable(false);
+//                .setOnceLocation(true)
+//                .setOnceLocationLatest(true);
+
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.startLocation();
+
+//        mLocationClient.getLastKnownLocation();
+        return null;
+
+    }
+
+
+    private void checkVersion() {
+        if (SharedPreferencesUtil.getInstance().getAutoCheckUpgrade()) {
+            XUpdate.newBuild(this)
+                    .updateUrl("http://47.100.235.194:8080/update/checkVersion")
+                    .updateParser(new CustomUpdateParser())
+                    .update();
+        }
+
+    }
 
 }

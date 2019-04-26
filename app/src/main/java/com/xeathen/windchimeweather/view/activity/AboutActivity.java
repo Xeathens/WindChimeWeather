@@ -1,6 +1,8 @@
 package com.xeathen.windchimeweather.view.activity;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -22,6 +24,7 @@ import com.xeathen.lib.utils.LogUtil;
 import com.xeathen.windchimeweather.R;
 import com.xeathen.windchimeweather.custom.CustomUpdateParser;
 import com.xeathen.windchimeweather.util.EnvUtil;
+import com.xeathen.windchimeweather.util.WechatShareUtil;
 import com.xuexiang.xupdate.XUpdate;
 import com.xuexiang.xupdate.utils.UpdateUtils;
 
@@ -52,6 +55,12 @@ public class AboutActivity extends BaseActivity {
 
     @BindView(R.id.bt_share)
     TextView btShare;
+
+    @BindView(R.id.bt_contact)
+    TextView btContact;
+
+    @BindView(R.id.bt_code)
+    TextView btCode;
 
     @BindView(R.id.about_version)
     TextView aboutVersion;
@@ -175,6 +184,7 @@ public class AboutActivity extends BaseActivity {
                 return false;
             }
         });
+//        WechatShareUtil.toFriends(this, "来试试风铃天气吧");
     }
 
     @OnClick(R.id.bt_upgrade)
@@ -183,6 +193,20 @@ public class AboutActivity extends BaseActivity {
                 .updateUrl("http://47.100.235.194:8080/update/checkVersion")
                 .updateParser(new CustomUpdateParser())
                 .update();
+    }
+
+    @OnClick(R.id.bt_code)
+    public void checkResourceCode(){
+        toastShort(this, "丢人,别看了");
+    }
+
+
+    @OnClick(R.id.bt_contact)
+    public void contactAuthor(){
+        ClipboardManager manager = (ClipboardManager) this.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText("msg", getString(R.string.email));
+        manager.setPrimaryClip(clipData);
+        toastLong(this, String.format("我的邮箱 [%s] 已经复制到剪切板啦", getString(R.string.email)));
     }
 
 

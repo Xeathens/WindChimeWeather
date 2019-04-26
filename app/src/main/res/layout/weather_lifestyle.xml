@@ -45,7 +45,9 @@
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
                     android:text="紫外线"
-                    android:textColor="@color/txt_lifestyle" />
+                    android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+                    />
 
                 <TextView
                     android:id="@+id/lifestyle_uv"
@@ -55,6 +57,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+
                     tools:text="弱" />
 
             </LinearLayout>
@@ -77,7 +81,7 @@
                 android:layout_marginLeft="30dp"
 
                 android:layout_marginTop="15dp"
-                app:srcCompat="@drawable/ic_badminton" />
+                app:srcCompat="@drawable/ic_archery" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -92,7 +96,9 @@
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
                     android:text="运动指数"
-                    android:textColor="@color/txt_lifestyle" />
+                    android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+                    />
 
                 <TextView
                     android:id="@+id/lifestyle_sport"
@@ -102,6 +108,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+
                     tools:text="较不宜" />
 
             </LinearLayout>
@@ -141,7 +149,9 @@
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
                     android:text="湿度"
-                    android:textColor="@color/txt_lifestyle" />
+                    android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+                    />
 
                 <TextView
                     android:id="@+id/lifestyle_hum"
@@ -151,6 +161,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+
                     tools:text="63%" />
 
             </LinearLayout>
@@ -174,7 +186,7 @@
                 android:layout_marginLeft="30dp"
 
                 android:layout_marginTop="15dp"
-                app:srcCompat="@drawable/ic_cw" />
+                app:srcCompat="@drawable/ic_comf" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -188,17 +200,21 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="15dp"
                     android:layout_weight="1"
-                    android:text="洗车指数"
-                    android:textColor="@color/txt_lifestyle" />
+                    android:text="舒适度"
+                    android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+                    />
 
                 <TextView
-                    android:id="@+id/lifestyle_cw"
+                    android:id="@+id/lifestyle_comf"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:textColor="@color/txt_lifestyle"
+                    android:textSize="15sp"
+
                     tools:text="不宜" />
 
             </LinearLayout>

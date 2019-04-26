@@ -28,8 +28,7 @@ import interfaces.heweather.com.interfacesmodule.view.HeWeather;
 
 public class SearchActivity extends BaseActivity {
 
-    @BindView(R.id.bt_search_city)
-    Button btSearchCity;
+
 
     @BindView(R.id.edit_search_city)
     EditText etSearchCity;
@@ -91,7 +90,6 @@ public class SearchActivity extends BaseActivity {
         });
     }
 
-    @OnClick(R.id.bt_search_city)
     public void searchCity() {
 
         HeWeather.getSearch(this, etSearchCity.getText().toString(), "world", 20, Lang.CHINESE_SIMPLIFIED, new HeWeather.OnResultSearchBeansListener() {

@@ -18,6 +18,8 @@
         android:layout_weight="1"
         android:gravity="center_vertical|start"
         android:textColor="@color/txt_forecast"
+        android:textSize="16sp"
+
         tools:text="星期三" />
 
     <TextView
@@ -32,6 +34,7 @@
 
 
         android:textColor="@color/txt_forecast"
+        android:textSize="16sp"
 
 
         tools:text="多云" />
@@ -47,6 +50,7 @@
 
 
         android:textColor="@color/txt_forecast"
+        android:textSize="16sp"
 
         tools:text="3°~10°" />
 

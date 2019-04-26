@@ -4,8 +4,12 @@
         <Preference
             android:key="auto_update_time"
             android:title="自动更新频率"/>
+        <CheckBoxPreference
+            android:key="auto_check_upgrade"
+            android:title="自动检查更新"/>
         <Preference
             android:key="clear_cache"
             android:title="清除缓存"/>
+
     </PreferenceCategory>
 </PreferenceScreen>

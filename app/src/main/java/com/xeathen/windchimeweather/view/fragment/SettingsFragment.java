@@ -1,6 +1,7 @@
 package com.xeathen.windchimeweather.view.fragment;
 
 import android.content.Intent;
+import android.preference.CheckBoxPreference;
 import android.support.v7.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -27,11 +28,13 @@ import java.util.Locale;
  * @description:
  */
 public class SettingsFragment extends PreferenceFragment
-        implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener{
+        implements Preference.OnPreferenceClickListener, Preference.OnPreferenceChangeListener {
 
     private SharedPreferencesUtil mSpfu;
 
     private Preference mAutoUpdateTime;
+
+    private CheckBoxPreference mAutoCheckUpgrade;
 
     private Preference mClearCache;
 
@@ -41,22 +44,27 @@ public class SettingsFragment extends PreferenceFragment
         addPreferencesFromResource(R.xml.settings);
         mSpfu = SharedPreferencesUtil.getInstance();
         mAutoUpdateTime = findPreference(SharedPreferencesUtil.AUTO_UPDATE_TIME);
+        mAutoCheckUpgrade = (CheckBoxPreference) findPreference(SharedPreferencesUtil.AUTO_CHECK_UPGRADE);
         mClearCache = findPreference(SharedPreferencesUtil.CLEAR_CACHE);
+
+        mAutoCheckUpgrade.setChecked(SharedPreferencesUtil.getInstance().getAutoCheckUpgrade());
 
         mAutoUpdateTime.setSummary(mSpfu.getAutoUpdateTime() == 0 ? "禁止刷新" : String.format(Locale.CHINA, "每%d小时更新", mSpfu.getAutoUpdateTime()));
         mAutoUpdateTime.setOnPreferenceClickListener(this);
         //缓存清除，用文件储存时方可用
         mClearCache.setSummary("开发调整中");
+
+        mAutoCheckUpgrade.setOnPreferenceChangeListener(this);
+
     }
 
 
     //showDialog
 
 
-
     @Override
     public boolean onPreferenceClick(Preference preference) {
-        if (mAutoUpdateTime == preference){
+        if (mAutoUpdateTime == preference) {
             //dialog
             showUpdateDialog();
         }
@@ -64,13 +72,13 @@ public class SettingsFragment extends PreferenceFragment
         return true;
     }
 
-    private void showUpdateDialog(){
+    private void showUpdateDialog() {
         LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View dialogLayout = inflater.inflate(R.layout.dialog_update, (ViewGroup) getActivity().findViewById(R.id.dialog_update));
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity()).setView(dialogLayout);
         final AlertDialog alertDialog = builder.create();
         final SeekBar mSeekBar = dialogLayout.findViewById(R.id.time_seekbar);
-        final TextView tvShowHour =  dialogLayout.findViewById(R.id.tv_showhour);
+        final TextView tvShowHour = dialogLayout.findViewById(R.id.tv_showhour);
         TextView tvDone = dialogLayout.findViewById(R.id.done);
         mSeekBar.setMax(24);
         mSeekBar.setProgress(mSpfu.getAutoUpdateTime());
@@ -106,6 +114,12 @@ public class SettingsFragment extends PreferenceFragment
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object newValue) {
-        return false;
+        if (preference == mAutoCheckUpgrade){
+            SharedPreferencesUtil.getInstance().setAutoCheckUpgrade((Boolean) newValue);
+        }
+
+
+
+        return true;
     }
 }

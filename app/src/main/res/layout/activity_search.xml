@@ -22,29 +22,37 @@
         android:orientation="vertical"
         android:focusableInTouchMode="false">
 
-        <EditText
-            android:id="@+id/edit_search_city"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:orientation="horizontal">
 
-            android:imeActionLabel="搜索"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:theme="@style/Theme.AppCompat.Light.Dialog"
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/ic_globe"
+                />
 
-            />
+            <EditText
+                android:id="@+id/edit_search_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
 
-        <Button
-            android:id="@+id/bt_search_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/search_city"
-            android:visibility="gone" />
+                android:imeActionLabel="搜索"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:theme="@style/Theme.AppCompat.Light.Dialog"
+
+                />
+        </LinearLayout>
+
+
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_city_list"

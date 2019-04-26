@@ -17,7 +17,11 @@ public class SharedPreferencesUtil {
 
     public static final String AUTO_UPDATE_TIME = "auto_update_time";//自动更新频率
 
+
+    public static final String AUTO_CHECK_UPGRADE = "auto_check_upgrade"; //自动检查更新
+
     public static final String CLEAR_CACHE = "clear_cache"; //清空缓存
+
 
     private SharedPreferences mPrefs;
 
@@ -38,10 +42,16 @@ public class SharedPreferencesUtil {
     }
 
     public int getAutoUpdateTime() {
-        return mPrefs.getInt(AUTO_UPDATE_TIME, 12);
+        return mPrefs.getInt(AUTO_UPDATE_TIME, 0);
     }
 
+    public void setAutoCheckUpgrade(Boolean b){
+        mPrefs.edit().putBoolean(AUTO_CHECK_UPGRADE, b).apply();
+    }
 
+    public  Boolean getAutoCheckUpgrade() {
+        return mPrefs.getBoolean(AUTO_CHECK_UPGRADE, true);
+    }
 
     private SharedPreferencesUtil() {
         mPrefs = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
