@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * @author: 蛋清蛋黄
- * @date: 2019/2/19
- * @description:
+ * @author 蛋清蛋黄
+ * @date 2019/2/19
+ * @description
  */
 public class DateUtil {
     public static int getDayofWeekInNumber(String dateTime) {
